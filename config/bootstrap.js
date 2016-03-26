@@ -23,31 +23,21 @@ module.exports.bootstrap = async function bootstrap(cb) {
   });
 
   // Destroy and recreate categories
-  const categoryCreatePromises = CategoryJSON.map(x => Category.create(x));
-  await Category.destroy({});
+  const categoryCreatePromises = CategoryJSON.map(x => Category.findOrCreate(x, x));
   await Promise.all(categoryCreatePromises);
 
   // Destroy and recreate speakers
-  const speakerCreatePromises = SpeakerJSON.map(x => Speaker.create(x));
-  await Speaker.destroy({});
+  const speakerCreatePromises = SpeakerJSON.map(x => Speaker.findOrCreate(x, x));
   await Promise.all(speakerCreatePromises);
 
   if(process.env.NODE_ENV === 'development') {
     // Create a testing user
-    const testUser = await User.find({ name: 'test user' });
-    if(testUser.length === 0) {
-      await User.destroy({ twitterHandle: 'testUser' });
-      await User.create({ twitterHandle: 'testUser', name: 'test user' });
-    }
-    
-    // Create quotes
-    // const quoteCreatePromises = QuoteJSON.map(x => Quote.create(x));
-    // await Quote.destroy({});
-    // await Promise.all(quoteCreatePromises);
+    const testUser = { twitterHandle: 'testUser', name: 'test user' };
+    await User.findOrCreate(testUser, testUser);
 
-    // Destroy games and questions
-    // await Game.destroy();
-    // await Question.destroy();
+    // Create quotes
+    const quoteCreatePromises = QuoteJSON.map(x => Quote.findOrCreate(x, x));
+    await Promise.all(quoteCreatePromises);
   }
 
   cb();

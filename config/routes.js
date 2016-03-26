@@ -37,6 +37,8 @@ module.exports.routes = {
   // API Routes
   // These are API routes that will be consumed from the client-side
   // javascript and from the mobile application.
+  // Blueprints are turned off by default and re-enabled here for
+  // only the routes that are needed.
 
   /**
    * TODO: API routes for:
