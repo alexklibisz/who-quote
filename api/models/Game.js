@@ -7,7 +7,7 @@
 
 module.exports.attributes = {
 
-  createdBy: {
+  user: {
     model: 'User',
     required: true
   },
@@ -23,3 +23,5 @@ module.exports.attributes = {
   }
 
 };
+
+// module.exports.beforeCreate

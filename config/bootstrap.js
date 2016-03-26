@@ -15,10 +15,6 @@ import Promise from 'bluebird';
 
 module.exports.bootstrap = async function bootstrap(cb) {
 
-  sails.log.verbose('Populate the categories and speakers using static data');
-  sails.log.verbose(CategoryJSON);
-  sails.log.verbose(SpeakerJSON);
-
   // Destroy and recreate categories
   const categoryCreatePromises = CategoryJSON.map(x => Category.create(x));
   await Category.destroy({});
@@ -28,6 +24,12 @@ module.exports.bootstrap = async function bootstrap(cb) {
   const speakerCreatePromises = SpeakerJSON.map(x => Speaker.create(x));
   await Speaker.destroy({});
   await Promise.all(speakerCreatePromises);
+
+  if(process.env.NODE_ENV === 'development') {
+    // Create a testing user
+    await User.destroy({ twitterHandle: 'testUser' });
+    await User.create({ twitterHandle: 'testUser', name: 'test user' });
+  }
 
   cb();
 };

@@ -28,9 +28,10 @@ module.exports.routes = {
   // with Handlebars templating in the view.
   '/': 'ViewController.index',
   '/style': 'ViewController.style',
-  '/play/select-category': 'ViewController.selectCategory',
-  '/play/:gameId/question/:questionNumber': 'ViewController.question',
-  '/play/:gameId/result': 'ViewController.result',
+  '/game/select-category': 'ViewController.selectCategory',
+  'POST /game': 'ViewController.game',
+  '/game/:gameId/question/:questionNumber': 'ViewController.question',
+  '/game/:gameId/result': 'ViewController.result',
   '/user/:userId': 'ViewController.user',
 
   // API Routes
