@@ -19,7 +19,8 @@ module.exports.attributes = {
 
   // Populated when the question is created
   multipleChoiceSpeakers: {
-    type: 'array'
+    collection: 'Speaker',
+    required: true
   },
 
   // Populated via patch request when user answers
@@ -34,13 +35,13 @@ module.exports.attributes = {
 
 };
 
-module.exports.beforeCreate = function beforeCreate(values, cb) {
+module.exports.beforeCreate = function beforeCreate(values, next) {
   // TODO: populate the multiple choice speakers randomly
   // using the category on the game object.
-  cb();
+  next();
 };
 
-module.exports.beforeUpdate = function beforeUpdate(valuesToUpdate, cb) {
+module.exports.beforeUpdate = function beforeUpdate(valuesToUpdate, next) {
   // TODO: verify the selectedSpeaker and set isCorrect.
-  cb();
+  next();
 }

@@ -1,7 +1,7 @@
 module.exports.attributes = {
 
   category: {
-    model: 'Quote',
+    model: 'Category',
     required: true
   },
 
