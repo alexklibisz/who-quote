@@ -1,4 +1,4 @@
-@twitter-img: "/images/twitter_logo.png"; 
+@import 'variables.less'; 
 
 .image-container {
 	background-color: #fff;
@@ -37,8 +37,14 @@
 	border-radius: 8px;
 	min-height: 50px;
 	border: 1px solid #E1E8ED;
-	margin: 10px;
+	margin: 5px 10px;
 	padding: 5px; 
+	cursor: pointer;
+	transition: background-color 0.15s;
+
+	&:hover {
+		background-color: @background;
+	}
 }
 
 .twitter-pic {

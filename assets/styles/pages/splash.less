@@ -1,14 +1,9 @@
-@logo: "/images/who-quote-logo.svg";
-@splash-bg: "/images/splash.jpg";
+@import 'variables.less';
 
 .background-image {
-	background-image: url(@splash-bg);
-	background-repeat: no-repeat;
-	background-size: cover;
-    position: absolute;
+	background-color: @main;
 	height: 100%;
-    width: 100%;
-	.blur-gray(5px, 0.7);
+  width: 100%;
 }
 
 .logo {
