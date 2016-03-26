@@ -14,12 +14,13 @@ module.exports.attributes = {
 
   twitterHandle: {
     type: 'string',
-    required: true
+    required: true,
+    primaryKey: true
   },
 
   category: {
     model: 'Category',
     required: true
   }
-  
+
 };

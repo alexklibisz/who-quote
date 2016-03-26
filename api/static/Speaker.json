@@ -7,26 +7,26 @@
   {
     "name": "Ted Cruz",
     "twitterHandle": "tedcruz",
-    "category": "politicans"
+    "category": "politicians"
   },
   {
     "name": "John Kasich",
     "twitterHandle": "JohnKasich",
-    "category": "politicans"
+    "category": "politicians"
   },
   {
     "name": "Bernie Sanders",
     "twitterHandle": "BernieSanders",
-    "category": "politicans"
+    "category": "politicians"
   },
   {
     "name": "Hillary Clinton",
     "twitterHandle": "HillaryClinton",
-    "category": "politicans"
+    "category": "politicians"
   },
   {
     "name": "President Obama",
-    "twitter": "POTUS",
-    "category": "politicans"
+    "twitterHandle": "POTUS",
+    "category": "politicians"
   }
 ]
