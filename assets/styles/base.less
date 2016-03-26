@@ -1,4 +1,4 @@
-@painter: "sytles/fonts/SignPainter.otf";
+@import 'variables.less';
 
 @font-face {
     font-family: SignPainter;
@@ -11,14 +11,14 @@ html, body {
 
 body {
   font-family: Helvetica Neue, Arial, sans serif;
-  background-color: #F5F8FA;
-  color: #303030;
+  background-color: @background;
+  color: @font;
 }
 
 .bar {
-    height: 45px;
-    background-color: rgba(255, 255, 255, 0.8);
-    color: #0084B4;
+    height: @nav-bar-height;
+    background-color: @nav-bar-bg;
+    color: @main;
     position: fixed;
     top: 0;
     left: 0;
@@ -27,13 +27,13 @@ body {
     
 
 	.top-logo {
-		font-family: SignPainter, Helvetica Neue;
+		font-family: SignPainter, Helvetica Neue, Helvetica, Arial, san serf;
 	    font-size: 3rem;
-	    line-height: 45px;
+	    line-height: @nav-bar-height;
 	    text-align: center;
 	}
 }
 
 .wrapper {
-  padding: 45px 0 0;
+  padding: @nav-bar-height 0 0;
 }
