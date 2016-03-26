@@ -33,23 +33,43 @@ module.exports.attributes = {
  */
 module.exports.afterCreate = async function afterCreate(game, next) {
 
-  function randomArray(min, max, length) {
-    const unique = {};
-    while(Object.keys(unique).length < Math.min(max - min, length)) {
-      unique[Math.floor(Math.random() * max) + min] = true;
-    }
-    return Object.keys(unique);
-  }
-
   // Questions need: game (game id), quote, multipleChoiceSpeakers.
+  const questionCount = 5;
+
+  // Get questionCount random quotes, one per question
   const
-    questionCount = 5,
-    quoteCount = await Question.count(),
-    quoteOffsets = randomArray(0, quoteCount, questionCount);
+    quoteCount = await Quote.count(),
+    quoteOffsets = _.shuffle(_.range(quoteCount)).splice(0, questionCount),
+    quoteRequests = quoteOffsets.map(x => Quote.find().limit(1).skip(x)),
+    quotes = (await Promise.all(quoteRequests)).map(x => x.shift());
 
-  console.log(quoteOffsets);
+  // Create the speaker groups. Each group should be an array contining the
+  // quote speaker and three other speakers in shuffled order.
+  const
+    speakers = await Speaker.find({ category: game.category }),
+    multipleChoiceSpeakerGroups = quotes.map((quote) => {
+      const
+        quoteSpeaker = speakers.filter(x => x.twitterHandle === quote.speaker),
+        filtered = speakers.filter(x => x.twitterHandle !== quote.speaker),
+        shuffled = _.shuffle(filtered);
+      return _.shuffle(shuffled.splice(0,3).concat(quoteSpeaker));
+    });
 
-  await Game.update(game.id, game);
+  // Create the actual questions by zipping up the quotes and multipleChoiceSpeakerGroups
+  const
+    questionObjects = _.zip(quotes, multipleChoiceSpeakerGroups)
+      .map(x => {
+        const
+          quote = x[0].id,
+          multipleChoiceSpeakers = x[1].map(x => x.twitterHandle);
+        return {
+          game: game.id, quote, multipleChoiceSpeakers
+        };
+      }),
+    questionCreatePromises = questionObjects.map(x => Question.create(x)),
+    questions = await Promise.all(questionCreatePromises);
 
+  // Add the questions to the game and update it
+  await Game.update({id: game.id}, { questions: questions.map(x => x.id) });
   next();
 };
