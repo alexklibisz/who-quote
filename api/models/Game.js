@@ -12,9 +12,6 @@ module.exports.attributes = {
     required: true
   },
 
-  // Populated by default
-  // createdAt: { }
-
   category: {
     model: 'Category',
     required: true
