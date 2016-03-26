@@ -14,7 +14,8 @@ module.exports.attributes = {
 
   slug: {
     type: 'string',
-    required: true
+    required: true,
+    primaryKey: true
   }
-  
+
 };

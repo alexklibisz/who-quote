@@ -1,0 +1,32 @@
+[
+  {
+    "name": "Donald J. Trump",
+    "twitterHandle": "realDonaldTrump",
+    "category": "politicians"
+  },
+  {
+    "name": "Ted Cruz",
+    "twitterHandle": "tedcruz",
+    "category": "politicans"
+  },
+  {
+    "name": "John Kasich",
+    "twitterHandle": "JohnKasich",
+    "category": "politicans"
+  },
+  {
+    "name": "Bernie Sanders",
+    "twitterHandle": "BernieSanders",
+    "category": "politicans"
+  },
+  {
+    "name": "Hillary Clinton",
+    "twitterHandle": "HillaryClinton",
+    "category": "politicans"
+  },
+  {
+    "name": "President Obama",
+    "twitter": "POTUS",
+    "category": "politicans"
+  }
+]
