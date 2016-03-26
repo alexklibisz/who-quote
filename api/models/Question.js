@@ -23,11 +23,12 @@ module.exports.attributes = {
     required: true
   },
 
-  // Populated via patch request when user answers
+  // Populated via put request when user answers
   selectedSpeaker: {
     model: 'Speaker'
   },
 
+  // Set via beforeUpdate function
   isCorrect: {
     type: 'boolean',
     defaultsTo: null
@@ -35,13 +36,14 @@ module.exports.attributes = {
 
 };
 
-module.exports.beforeCreate = function beforeCreate(values, next) {
-  // TODO: populate the multiple choice speakers randomly
-  // using the category on the game object.
+/**
+ * Set the isCorrect value based on the selectedSpeaker before updating.
+ * @param  {[type]}   updatedQuestion [description]
+ * @param  {Function} next            [description]
+ * @return {[type]}                   [description]
+ */
+module.exports.beforeUpdate = async function beforeUpdate(updatedQuestion, next) {
+  const question = await Question.findOne({id: updatedQuestion.id}).populate('quote');
+  updatedQuestion.isCorrect = (updatedQuestion.selectedSpeaker === question.quote.speaker);
   next();
 };
-
-module.exports.beforeUpdate = function beforeUpdate(valuesToUpdate, next) {
-  // TODO: verify the selectedSpeaker and set isCorrect.
-  next();
-}
