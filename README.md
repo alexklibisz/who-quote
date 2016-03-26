@@ -1,3 +1,2 @@
-# template-stuff
-
-a [Sails](http://sailsjs.org) application
+# who-quote
+WhoQuote.com
