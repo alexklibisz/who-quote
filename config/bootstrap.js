@@ -11,9 +11,16 @@
 
 import CategoryJSON from '../api/static/Category.json';
 import SpeakerJSON from '../api/static/Speaker.json';
+import QuoteJSON from '../api/static/Quote.json';
 import Promise from 'bluebird';
 
 module.exports.bootstrap = async function bootstrap(cb) {
+
+  // Define promises to throw errors instead of swallowing them
+  Promise.onPossiblyUnhandledRejection(function (error) {
+    console.error(error);
+    throw error;
+  });
 
   // Destroy and recreate categories
   const categoryCreatePromises = CategoryJSON.map(x => Category.create(x));
@@ -29,6 +36,15 @@ module.exports.bootstrap = async function bootstrap(cb) {
     // Create a testing user
     await User.destroy({ twitterHandle: 'testUser' });
     await User.create({ twitterHandle: 'testUser', name: 'test user' });
+
+    // Create quotes
+    const quoteCreatePromises = QuoteJSON.map(x => Quote.create(x));
+    await Quote.destroy({});
+    await Promise.all(quoteCreatePromises);
+
+    // Destroy games and questions
+    await Game.destroy();
+    await Question.destroy();
   }
 
   cb();
