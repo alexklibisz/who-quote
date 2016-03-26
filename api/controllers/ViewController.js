@@ -16,9 +16,34 @@ module.exports = {
     });
   },
 
+  async style(req, res) {
+    const vm = {
+      title: 'Style'
+    };
+    return res.view('style', {
+      vm
+    });
+  },
+
   async selectCategory(req, res) {
     const vm = {
-      title: 'Select a Category'
+      title: 'Select a Category',
+      categories: [{
+        'title': 'Politicians',
+        'image': '/images/politicians.jpg'
+      }, {
+        'title': 'Athletes',
+        'image': '/images/athletes.jpg'
+      }, {
+        'title': 'Musicians',
+        'image': '/images/musicians.jpg'
+      }, {
+        'title': 'Movie Stars',
+        'image': '/images/movie-stars.jpg'
+      }, {
+        'title': 'TV Personalities',
+        'image': '/images/tv-personalities.jpg'
+      }]
     };
     return res.view('play/select-category', {
       vm

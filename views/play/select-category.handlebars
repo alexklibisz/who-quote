@@ -1,4 +1,14 @@
-<h1>{{vm.title}}</h1>
-<pre>
-  {{vm}}
-</pre>
+<div class="bar">
+	<div class="top-logo">WhoQuote</div>	
+</div>
+
+<div class="wrapper">
+	<h4 class="cat-title">Categories</h4>
+	{{#each vm.categories}}
+		<section class="module parallax" style="background-image: url({{image}})">
+		  <div class="mod-container">
+		    <h1>{{title}}</h1>
+		  </div>
+		</section>
+	{{/each}}
+</div>

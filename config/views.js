@@ -89,7 +89,7 @@ module.exports.views = {
   *                                                                           *
   ****************************************************************************/
 
-  partials: false
-
+  partials: 'partials',
+  helpers: require('./helpers')
 
 };

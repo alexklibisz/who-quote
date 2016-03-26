@@ -1,0 +1,23 @@
+@logo: "/images/who-quote-logo.svg";
+@splash-bg: "/images/splash.jpg";
+
+.background-image {
+	background-image: url(@splash-bg);
+	background-repeat: no-repeat;
+	background-size: cover;
+    position: absolute;
+	height: 100%;
+    width: 100%;
+	.blur-gray(5px, 0.7);
+}
+
+.logo {
+  display: block;
+  text-indent: -9999px;
+  width: 280px;
+  height: 196px;
+  background: url(@logo);
+  background-size: 280px 196px;
+  margin: 0 auto;
+  transform: translate(0,75%);
+}

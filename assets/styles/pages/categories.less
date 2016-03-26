@@ -1,0 +1,57 @@
+
+.cat-title {
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.wrapper {
+  padding: 64px 0 0;
+}
+
+.mod-container {
+  background: rgba(0,0,0,0.2);
+  // box-shadow: inset 0 0 10px rgba(8, 8, 8, 0.70);
+  transition: background 0.45s;
+  cursor: pointer;
+
+  &:hover {
+    background: rgba(0,0,0,0.35);
+  }
+}
+
+section.parallax {
+  height: 120px;
+  background-color: rgba(0,0,0,0.7);
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  // border-radius: 8px;
+  margin: 40px 0;
+
+  & h1 {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 2.2rem;
+    line-height: 120px;
+    font-weight: 700;
+    text-align: center;
+    text-transform: uppercase;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    margin: 0;
+    transition: transform 0.4s;
+  }
+
+  &:first-child {
+    margin-top: 0;
+  }
+
+  &:last-child {
+    margin-bottom: 40px;
+  }
+
+  &:hover {
+    & h1 {
+      transform: scale(1.15);
+    }
+  }
+}
