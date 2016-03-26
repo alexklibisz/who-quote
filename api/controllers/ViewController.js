@@ -29,18 +29,22 @@ module.exports = {
     const categories = await Category.find({});
     const vm = { categories };
 
-    return res.view('play/select-category', {
+    return res.view('game/select-category', {
       vm
     });
   },
 
   async question(req, res) {
-    const vm = {
-      title: 'Question',
-      gameId: req.params.gameId,
-      questionNumber: req.params.questionNumber
-    };
-    return res.view('play/question', {
+    // const game = await Game.find({ gameId: req.params.gameId });
+    const vm = { 
+      'multipleChoiceSpeakers': [
+        { 'name': 'Donald Trump', 'twitterHandle': '@therealtrump' },
+        { 'name': 'Hillary Clinton', 'twitterHandle': '@hdog' },
+        { 'name': 'Hillary Clinton', 'twitterHandle': '@hdog' },
+        { 'name': 'Donald Trump', 'twitterHandle': '@therealtrump' }
+      ]};
+
+    return res.view('game/question', {
       vm
     });
   },
@@ -50,7 +54,7 @@ module.exports = {
       title: 'Result',
       gameId: req.params.gameId
     };
-    return res.view('play/result', {
+    return res.view('game/result', {
       vm
     });
   },
@@ -72,6 +76,7 @@ module.exports = {
    * @return {[type]}     [description]
    */
   async game(req, res) {
+    console.log(req.param('category'));
     const game = await Game.create({
       category: req.param('category'),
       user: req.param('user')

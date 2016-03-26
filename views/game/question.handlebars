@@ -1,0 +1,31 @@
+<div class="bar">
+	<div class="top-logo">WhoQuote</div>	
+</div>
+
+<div class="wrapper">
+	<div class="container">
+	<div class="row">
+	
+	<div class="image-container col-sm-6 col-xs-8 col-sm-offset-3 col-xs-offset-2">
+		<div class="quote-container">
+			<div class="quote">
+					This is the quote. This is the quote. This is the quote. This is the quote. This is the quote. This is the quote. This is the quote. This is the quote. This is the quote.
+				</div>
+			</div>
+		</div>
+	</div>
+		
+	<div class="row">
+		<div class="people-container">
+			{{#each vm.multipleChoiceSpeakers}}
+				<div class="person">
+				<img class="twitter-pic" src="https://pbs.twimg.com/profile_images/699059530924167170/-zyXIlEY_bigger.jpg">
+				<div>{{name}}</div>
+				<small>{{twitterHandle}}</small>
+				</div>
+			{{/each}}
+		</div>
+	</div>
+
+	</div>
+</div>
