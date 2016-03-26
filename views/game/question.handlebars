@@ -5,7 +5,6 @@
 <div class="wrapper">
 	<div class="container">
 		<div class="row">
-
 			<div class="image-container col-sm-6 col-xs-8 col-sm-offset-3 col-xs-offset-2">
 				<div class="quote-container">
 					<div class="quote">{{vm.question.quote.text}}</div>
@@ -14,9 +13,10 @@
 		</div>
 
 		<div class="row">
+			<div id="question" data-question="{{vm.question}}" class="hidden"></div>
 			<div class="people-container">
 				{{#each vm.question.multipleChoiceSpeakers}}
-					<div id ="{{twitterHandle}}" class="person">
+					<div class="person" data-th="{{twitterHandle}}">
 						<img class="twitter-pic" src="https://pbs.twimg.com/profile_images/699059530924167170/-zyXIlEY_bigger.jpg">
 						<div>{{name}}</div>
 						<small>@{{twitterHandle}}</small>
@@ -25,10 +25,7 @@
 			</div>
 		</div>
 		<div class="row">
-			<form action="/game" method="put">
-				<input type="hidden" name="selectedSpeaker" value="{{twitterHandle}}"/>
-				<div id="q-action" class="action" onClick="javascript:this.parentNode.submit();">Forfiet</div>
-			</form>
+			<div class="action">Forfiet</div>
 		</div>
 	</div>
 </div>
