@@ -26,25 +26,30 @@ module.exports = {
   },
 
   async selectCategory(req, res) {
-    const vm = {
-      title: 'Select a Category',
-      categories: [{
-        'title': 'Politicians',
-        'image': '/images/politicians.jpg'
-      }, {
-        'title': 'Athletes',
-        'image': '/images/athletes.jpg'
-      }, {
-        'title': 'Musicians',
-        'image': '/images/musicians.jpg'
-      }, {
-        'title': 'Movie Stars',
-        'image': '/images/movie-stars.jpg'
-      }, {
-        'title': 'TV Personalities',
-        'image': '/images/tv-personalities.jpg'
-      }]
-    };
+    // const vm = {
+    //   title: 'Select a Category',
+    //   categories: [{
+    //     'title': 'Politicians',
+    //     'image': '/images/politicians.jpg'
+    //   }, {
+    //     'title': 'Athletes',
+    //     'image': '/images/athletes.jpg'
+    //   }, {
+    //     'title': 'Musicians',
+    //     'image': '/images/musicians.jpg'
+    //   }, {
+    //     'title': 'Movie Stars',
+    //     'image': '/images/movie-stars.jpg'
+    //   }, {
+    //     'title': 'TV Personalities',
+    //     'image': '/images/tv-personalities.jpg'
+    //   }]
+    // };
+    const categories = await Category.find({});
+    console.log(categories);
+    const vm = { categories };
+
+
     return res.view('play/select-category', {
       vm
     });
