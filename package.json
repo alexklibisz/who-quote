@@ -28,7 +28,7 @@
   "scripts": {
     "debug": "node debug app.js",
     "start": "node app.js",
-    "dev": "node ./node_modules/nodemon/bin/nodemon.js"
+    "dev": "node ./node_modules/nodemon/bin/nodemon.js app.js -- --verbose"
   },
   "main": "app.js",
   "repository": {
