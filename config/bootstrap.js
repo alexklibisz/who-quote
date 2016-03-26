@@ -34,17 +34,20 @@ module.exports.bootstrap = async function bootstrap(cb) {
 
   if(process.env.NODE_ENV === 'development') {
     // Create a testing user
-    await User.destroy({ twitterHandle: 'testUser' });
-    await User.create({ twitterHandle: 'testUser', name: 'test user' });
-
+    const testUser = await User.find({ name: 'test user' });
+    if(testUser.length === 0) {
+      await User.destroy({ twitterHandle: 'testUser' });
+      await User.create({ twitterHandle: 'testUser', name: 'test user' });
+    }
+    
     // Create quotes
-    const quoteCreatePromises = QuoteJSON.map(x => Quote.create(x));
-    await Quote.destroy({});
-    await Promise.all(quoteCreatePromises);
+    // const quoteCreatePromises = QuoteJSON.map(x => Quote.create(x));
+    // await Quote.destroy({});
+    // await Promise.all(quoteCreatePromises);
 
     // Destroy games and questions
-    await Game.destroy();
-    await Question.destroy();
+    // await Game.destroy();
+    // await Question.destroy();
   }
 
   cb();
