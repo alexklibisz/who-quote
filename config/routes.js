@@ -27,7 +27,6 @@ module.exports.routes = {
   // The views are rendered via return res.view(viewName, viewModel)
   // with Handlebars templating in the view.
   '/': 'ViewController.index',
-  '/style': 'ViewController.style',
   '/play/select-category': 'ViewController.selectCategory',
   '/play/:gameId/question/:questionNumber': 'ViewController.question',
   '/play/:gameId/result': 'ViewController.result',
