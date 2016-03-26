@@ -3,11 +3,11 @@
 </div>
 
 <div class="wrapper">
-	<h4 class="cat-title">Categories</h4>
+	{{!-- <h4 class="cat-title">Categories</h4> --}}
 	{{#each vm.categories}}
-		<section class="module parallax" style="background-image: url({{image}})">
+		<section class="module parallax" style="background-image: url(/images/{{slug}}.jpg)">
 		  <div class="mod-container">
-		    <h1>{{title}}</h1>
+		    <h1>{{name}}</h1>
 		  </div>
 		</section>
 	{{/each}}
