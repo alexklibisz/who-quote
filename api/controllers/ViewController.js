@@ -16,15 +16,6 @@ module.exports = {
     });
   },
 
-  async style(req, res) {
-    const vm = {
-      title: 'Style'
-    };
-    return res.view('style', {
-      vm
-    });
-  },
-
   async selectCategory(req, res) {
     const categories = await Category.find({});
     const vm = { categories };
