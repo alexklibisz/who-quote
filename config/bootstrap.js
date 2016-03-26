@@ -9,9 +9,25 @@
  * http://sailsjs.org/#!/documentation/reference/sails.config/sails.config.bootstrap.html
  */
 
-module.exports.bootstrap = function(cb) {
+import CategoryJSON from '../api/static/Category.json';
+import SpeakerJSON from '../api/static/Speaker.json';
+import Promise from 'bluebird';
 
-  // It's very important to trigger this callback method when you are finished
-  // with the bootstrap!  (otherwise your server will never lift, since it's waiting on the bootstrap)
+module.exports.bootstrap = async function bootstrap(cb) {
+
+  sails.log.verbose('Populate the categories and speakers using static data');
+  sails.log.verbose(CategoryJSON);
+  sails.log.verbose(SpeakerJSON);
+
+  // Destroy and recreate categories
+  const categoryCreatePromises = CategoryJSON.map(x => Category.create(x));
+  await Category.destroy({});
+  await Promise.all(categoryCreatePromises);
+
+  // Destroy and recreate speakers
+  const speakerCreatePromises = SpeakerJSON.map(x => Speaker.create(x));
+  await Speaker.destroy({});
+  await Promise.all(speakerCreatePromises);
+
   cb();
 };
