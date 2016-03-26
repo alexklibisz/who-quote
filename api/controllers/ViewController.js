@@ -35,15 +35,13 @@ module.exports = {
   },
 
   async question(req, res) {
-    // const game = await Game.find({ gameId: req.params.gameId });
-    const vm = { 
-      'multipleChoiceSpeakers': [
-        { 'name': 'Donald Trump', 'twitterHandle': '@therealtrump' },
-        { 'name': 'Hillary Clinton', 'twitterHandle': '@hdog' },
-        { 'name': 'Hillary Clinton', 'twitterHandle': '@hdog' },
-        { 'name': 'Donald Trump', 'twitterHandle': '@therealtrump' }
-      ]};
+    const
+      {gameId, questionNumber} = req.params,
+      game = await Game.findOne({ id: gameId }).populate('questions'),
+      questionId = game.questions[questionNumber - 1].id,
+      question = await Question.findOne({ id: questionId }).populate(['quote', 'multipleChoiceSpeakers']);
 
+    const vm = { game, question };
     return res.view('game/question', {
       vm
     });
@@ -76,7 +74,6 @@ module.exports = {
    * @return {[type]}     [description]
    */
   async game(req, res) {
-    console.log(req.param('category'));
     const game = await Game.create({
       category: req.param('category'),
       user: req.param('user')

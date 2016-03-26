@@ -70,6 +70,6 @@ module.exports.afterCreate = async function afterCreate(game, next) {
     questions = await Promise.all(questionCreatePromises);
 
   // Add the questions to the game and update it
-  await Game.update({id: game.id}, { questions: questions.map(x => x.id) });
+  // await Game.update({id: game.id}, { questions: questions.map(x => x.id) });
   next();
 };
