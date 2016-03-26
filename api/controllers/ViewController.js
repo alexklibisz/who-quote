@@ -41,8 +41,17 @@ module.exports = {
       title: 'Result',
       gameId: req.params.gameId
     };
-    console.log(vm);
     return res.view('play/result', {
+      vm
+    });
+  },
+
+  async user(req, res) {
+    const vm = {
+      title: 'User',
+      userId: req.params.userId
+    };
+    return res.view('user', {
       vm
     });
   }

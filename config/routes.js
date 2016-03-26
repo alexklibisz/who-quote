@@ -30,7 +30,7 @@ module.exports.routes = {
   '/play/select-category': 'ViewController.selectCategory',
   '/play/:gameId/question/:questionNumber': 'ViewController.question',
   '/play/:gameId/result': 'ViewController.result',
-  '/user/:userId/results': 'ViewController.userResults',
+  '/user/:userId': 'ViewController.user',
 
   // API Routes
   // These are API routes that will be consumed from the client-side
