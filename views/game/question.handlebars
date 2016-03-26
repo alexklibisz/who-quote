@@ -16,7 +16,7 @@
 		<div class="row">
 			<div class="people-container">
 				{{#each vm.question.multipleChoiceSpeakers}}
-					<div class="person">
+					<div id ="{{twitterHandle}}" class="person">
 						<img class="twitter-pic" src="https://pbs.twimg.com/profile_images/699059530924167170/-zyXIlEY_bigger.jpg">
 						<div>{{name}}</div>
 						<small>@{{twitterHandle}}</small>
@@ -24,6 +24,11 @@
 				{{/each}}
 			</div>
 		</div>
-
+		<div class="row">
+			<form action="/game" method="put">
+				<input type="hidden" name="selectedSpeaker" value="{{twitterHandle}}"/>
+				<div id="q-action" class="action" onClick="javascript:this.parentNode.submit();">Forfiet</div>
+			</form>
+		</div>
 	</div>
 </div>
