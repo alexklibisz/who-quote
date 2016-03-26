@@ -7,13 +7,10 @@
 
 module.exports.attributes = {
 
-  createdBy: {
+  user: {
     model: 'User',
     required: true
   },
-
-  // Populated by default
-  // createdAt: { }
 
   category: {
     model: 'Category',
@@ -26,3 +23,5 @@ module.exports.attributes = {
   }
 
 };
+
+// module.exports.beforeCreate

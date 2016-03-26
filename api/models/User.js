@@ -7,22 +7,20 @@
 
 module.exports.attributes = {
 
-  facebookId: {
+  twitterHandle: {
     type: 'string',
-    required: true
+    required: true,
+    primaryKey: true
   },
-
-  // Populated automatically
-  // createdAt: {}
 
   name: {
     type: 'string',
     required: true
   },
 
-  game: {
+  games: {
     collection: 'Game',
-    via: 'createdBy'
+    via: 'user'
   }
 
 };

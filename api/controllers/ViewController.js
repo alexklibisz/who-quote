@@ -63,6 +63,20 @@ module.exports = {
     return res.view('user', {
       vm
     });
+  },
+
+  /**
+   * Create a game using the posted params and redirect to the question route.
+   * @param  {[type]} req [description]
+   * @param  {[type]} res [description]
+   * @return {[type]}     [description]
+   */
+  async game(req, res) {
+    const game = await Game.create({
+      category: req.param('category'),
+      user: req.param('user')
+    });
+    return res.redirect(`/game/${game.id}/question/1`);
   }
 
 };

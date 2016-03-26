@@ -28,7 +28,8 @@
     "include-all": "~0.1.6",
     "rc": "1.0.1",
     "sails": "~0.12.1",
-    "sails-disk": "~0.10.9"
+    "sails-disk": "~0.10.9",
+    "twitter": "^1.2.5"
   },
   "babel": {
     "presets": [
