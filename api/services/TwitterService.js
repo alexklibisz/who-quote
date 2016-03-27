@@ -23,7 +23,7 @@ module.exports.getNewQuotes = async function getNewQuotes({ category }) {
 
   // Return if the newest quote is less than one day old and there are
   // more than 100 quotes total for this category.
-  if(daysSinceCreated < 1 && quotesCount > 100) {
+  if(daysSinceCreated < 1 && quotesCount > 200) {
     return;
   }
 
@@ -56,8 +56,7 @@ module.exports.getNewQuotes = async function getNewQuotes({ category }) {
       .map(x => getTweets(x[0].twitterId, ((x[1] !== undefined) ? x[1].tweetId : 0))),
     tweets = _.flatten((await Promise.all(tweetRequests)));
 
-  // Sanitize the tweets
-  const sanitizedTweets = tweets;
+  // TODO: could sanitize the tweets here
 
   // Convert the sanitized tweets into quote objects and create the quote objects.
   const
