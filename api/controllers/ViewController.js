@@ -9,7 +9,7 @@ module.exports = {
 
   async index(req, res) {
     const categories = await Category.find({});
-    const vm = { categories };
+    const vm = { title: 'WhoQuote', categories };
 
     return res.view('home', {
       vm
@@ -83,6 +83,8 @@ module.exports = {
       category: req.param('category'),
       user: req.param('user')
     });
+
+    console.log(game);
     return res.redirect(`/game/${game.id}/question/1`);
   }
 
