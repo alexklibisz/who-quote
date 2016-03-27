@@ -1,9 +1,9 @@
 <div class="bar">
     <a href="/" target="_parent"><div class="top-logo">WhoQuote</div></a>
-	<div class="gh"><i class="fa fa-github"></i></div>
+	<div class="gh"><a href="https://github.com/alexklibisz/who-quote" target="_blank"><i class="fa fa-github"></i></a></div>
 </div>
 
-<div class="background">
+<div class="background"> 
 	<div class="container">
 		<div class="row">
 			<a href="/" class="logo">
@@ -18,11 +18,10 @@
 </div>
 
 <div class="wrapper cat">
-	{{!-- <h4 class="cat-title">Categories</h4> --}}
 
-	<div class="row">
+	{{!-- <div class="row">
 		<div id="action-btn" class="action again">LOGIN</div>
-	</div>
+	</div> --}}
 
 	{{#each vm.categories}}		
 		<form action="/game" method="post">
@@ -36,6 +35,27 @@
 			</section>
 		</form>
 	{{/each}}
+
+	<section id="movie-stars" class="parallax" data-user="testUser" style="background-image: url(/images/movie-stars.jpg)">
+	  <div class="mod-container disabled">
+	    <h1>Movie Stars</h1>
+	    <h5>comming soon...</h5>
+	  </div>
+	</section>
+
+	<section id="musicians" class="parallax" data-user="testUser" style="background-image: url(/images/musicians.jpg)">
+	  <div class="mod-container disabled">
+	    <h1>Musicians</h1>
+	    <h5>comming soon...</h5>
+	  </div>
+	</section>
+
+	<section id="tv-personalities" class="parallax" data-user="testUser" style="background-image: url(/images/tv-personalities.jpg)">
+	  <div class="mod-container disabled">
+	    <h1>TV Personalities</h1>
+	    <h5>comming soon...</h5>
+	  </div>
+	</section>
 </div>
 
 {{!-- <section id="{{slug}}" class="parallax" data-user="testUser" style="background-image: url(/images/{{slug}}.jpg)">
