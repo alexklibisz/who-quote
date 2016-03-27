@@ -50,10 +50,10 @@
 	}
 
 	function setHandlers() {
-	var categories = document.getElementsByClassName('parallax');
-    for (var i = 0; i < categories.length; i++) {
-      categories[i].addEventListener('click', selectCategory, false);
-    }
+	// var categories = document.getElementsByClassName('parallax');
+ 	// for (var i = 0; i < categories.length; i++) {
+ 	//   categories[i].addEventListener('click', selectCategory, false);
+    // }
 
 	 var playBtn = document.getElementById('play-btn');
 	 if (playBtn !== null) playBtn.addEventListener('click', play, false);
