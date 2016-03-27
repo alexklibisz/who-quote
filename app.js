@@ -17,6 +17,11 @@
  * The same command-line arguments are supported, e.g.:
  * `node app.js --silent --port=80 --prod`
  */
+
+// Babel setup
+require('babel-register');
+require('babel-polyfill');
+
 // Prevent promises from swallowing errors.
 process.on('unhandledRejection', function(error, promise) {
   console.error(error.toString());

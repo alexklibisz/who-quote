@@ -40,8 +40,9 @@
   },
   "scripts": {
     "debug": "node debug app.js",
-    "start": "node --require babel-register --require babel-polyfill app.js --verbose --port=1337",
-    "dev": "node ./node_modules/nodemon/bin/nodemon.js --exec npm start"
+    "start": "node app.js --verbose",
+    "dev": "node ./node_modules/nodemon/bin/nodemon.js --exec npm start",
+    "prod": "./node_modules/forever/bin/forever stopall && ./node_modules/forever/bin/forever app.js --prod"
   },
   "main": "app.js",
   "repository": {
