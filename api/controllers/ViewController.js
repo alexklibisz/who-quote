@@ -48,16 +48,12 @@ module.exports = {
         break;
       case 60: message = 'Pretty Good!';
         break;
-      case 40: message = 'That\s ight.';
+      case 40: message = 'That\'s ight.';
         break;
       case 20: message = 'You got 1!';
         break;
       default: message = 'Twitter more!'
     }
-
-    console.log(correct, incorrect, percent, message);
-
-    // const {correct, incorrect, message, percent} = '';
 
     const vm = { title: 'Results', game, user, correct, incorrect, message, percent};
     return res.view('game/result', {
