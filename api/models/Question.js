@@ -32,6 +32,11 @@ module.exports.attributes = {
   isCorrect: {
     type: 'boolean',
     defaultsTo: false
+  },
+
+  isComplete: {
+    type: 'boolean',
+    defaultsTo: false
   }
 
 };
@@ -44,6 +49,9 @@ module.exports.attributes = {
  */
 module.exports.beforeUpdate = async function beforeUpdate(updatedQuestion, next) {
   const question = await Question.findOne({id: updatedQuestion.id}).populate('quote');
-  updatedQuestion.isCorrect = (updatedQuestion.selectedSpeaker === question.quote.speaker);
+  if(updatedQuestion.selectedSpeaker !== undefined) {
+    updatedQuestion.isCorrect = (updatedQuestion.selectedSpeaker === question.quote.speaker);
+    updatedQuestion.isComplete = true;
+  }
   next();
 };
