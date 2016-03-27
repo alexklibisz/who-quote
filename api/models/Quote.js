@@ -18,6 +18,11 @@ module.exports.attributes = {
   sourceURL: {
     type: 'string',
     required: true
+  },
+
+  tweetId: {
+    type: 'string',
+    required: true
   }
 
 };

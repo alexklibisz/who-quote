@@ -26,7 +26,13 @@ module.exports.getNewQuotes = async function getNewQuotes({ category }) {
     return;
   }
 
-  // Retrieve 5 new tweets for each user in this category
+  // Retrieve 5 new tweets for each speaker in this category
+  const
+    speakers = await Speaker.find({ category })
+    ;
+
+
+
   const params = {
     screen_name: 'realDonaldTrump',
     count: 10,
