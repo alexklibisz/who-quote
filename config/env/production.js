@@ -16,7 +16,7 @@ module.exports = {
     connection: 'mongo'
   },
 
-  port: 80,
+  port: process.env.PORT || 3000,
 
   log: {
     level: "debug"
