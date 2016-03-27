@@ -5,6 +5,10 @@
  * @docs        :: http://sailsjs.org/documentation/concepts/models-and-orm/models
  */
 
+function sortQuestions(questions) {
+  return questions.sort((a, b) => a.id.localeCompare(b.id));
+}
+
 module.exports.attributes = {
 
   user: {
@@ -20,8 +24,26 @@ module.exports.attributes = {
   questions: {
     collection: 'Question',
     via: 'game'
+  },
+
+  questionsSorted: function questionsSorted() {
+    if(this.questions !== undefined) {
+      return sortQuestions(this.questions);
+    } else {
+      return this.questions;
+    }
+  },
+
+  toJSON() {
+    const game = this.toObject();
+    if (game.questions !== undefined) {
+      game.questions = sortQuestions(game.questions);
+    }
+    return game;
   }
 };
+
+
 
 /**
  * After the initial game object has been created, generate the questions
@@ -46,30 +68,36 @@ module.exports.afterCreate = async function afterCreate(game, next) {
   // Create the speaker groups. Each group should be an array contining the
   // quote speaker and three other speakers in shuffled order.
   const
-    speakers = await Speaker.find({ category: game.category }),
+    speakers = await Speaker.find({
+      category: game.category
+    }),
     multipleChoiceSpeakerGroups = quotes.map((quote) => {
       const
         quoteSpeaker = speakers.filter(x => x.twitterId === quote.speaker),
         filtered = speakers.filter(x => x.twitterId !== quote.speaker),
         shuffled = _.shuffle(filtered);
-      return _.shuffle(shuffled.splice(0,3).concat(quoteSpeaker));
+      return _.shuffle(shuffled.splice(0, 3).concat(quoteSpeaker));
     });
 
   // Create the actual questions by zipping up the quotes and multipleChoiceSpeakerGroups
   const
     questionObjects = _.zip(quotes, multipleChoiceSpeakerGroups)
-      .map(x => {
-        const
-          quote = x[0].id,
-          multipleChoiceSpeakers = x[1].map(x => x.twitterId);
-        return {
-          game: game.id, quote, multipleChoiceSpeakers
-        };
-      }),
+    .map(x => {
+      const
+        quote = x[0].id,
+        multipleChoiceSpeakers = x[1].map(x => x.twitterId);
+      return {
+        game: game.id,
+        quote,
+        multipleChoiceSpeakers
+      };
+    }),
     questionCreatePromises = questionObjects.map(x => Question.create(x)),
     questions = await Promise.all(questionCreatePromises);
 
-  await TwitterService.getNewQuotes({ category: game.category });
+  await TwitterService.getNewQuotes({
+    category: game.category
+  });
 
   next();
 };
