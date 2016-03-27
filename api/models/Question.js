@@ -31,12 +31,14 @@ module.exports.attributes = {
   // Set via beforeUpdate function
   isCorrect: {
     type: 'boolean',
-    defaultsTo: false
+    defaultsTo: false,
+    required: true
   },
 
   isComplete: {
     type: 'boolean',
-    defaultsTo: false
+    defaultsTo: false,
+    required: true
   }
 
 };
