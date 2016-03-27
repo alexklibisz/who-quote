@@ -32,9 +32,10 @@ module.exports = {
       questionId = game.questions[questionNumber - 1].id,
       question = await Question.findOne({ id: questionId }).populate(['quote', 'multipleChoiceSpeakers']);
 
-    const vm = { game, question };
+    const vm = { title: 'Question', game, question };
     return res.view('game/question', {
-      vm
+      vm,
+      vms: JSON.stringify(vm)
     });
   },
 

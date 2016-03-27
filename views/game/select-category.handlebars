@@ -1,10 +1,11 @@
 <div class="bar">
-	<div class="top-logo">WhoQuote</div>	
+    <a href="/" target="_parent"><div class="top-logo">WhoQuote</div></a>
+	<div class="gh"><i class="fa fa-github"></i></div>
 </div>
 
 <div class="wrapper">
 	{{!-- <h4 class="cat-title">Categories</h4> --}}
-	{{#each vm.categories}}
+	{{#each vm.categories}}		
 		<form action="/game" method="post">
 			<input type="hidden" name="category" value="{{slug}}"/>
 			<input type="hidden" name="user" value="testUser"/>
@@ -17,3 +18,11 @@
 		</form>
 	{{/each}}
 </div>
+
+{{!-- <section id="{{slug}}" class="parallax" data-user="testUser" style="background-image: url(/images/{{slug}}.jpg)">
+  <div class="mod-container">
+    <h1>{{name}}</h1>
+  </div>
+</section>
+ --}}
+

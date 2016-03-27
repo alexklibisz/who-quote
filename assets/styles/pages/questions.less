@@ -17,7 +17,7 @@
     height: 100%;
     background: rgba(255,255,255,0.8);
     border-radius: 8px;
-    border: 1px solid #E1E8ED;
+    border: 1px solid @border;
 }
 
 .quote {
@@ -36,14 +36,28 @@
 	background-color: #fff;
 	border-radius: 8px;
 	min-height: 50px;
-	border: 1px solid #E1E8ED;
+	border: 1px solid @border;
 	margin: 5px 10px;
-	padding: 5px; 
+padding: 5px; 
 	cursor: pointer;
-	transition: background-color 0.15s;
+	transition: box-shadow 0.15s, background-color 0.15s;
 
-	&:hover {
-		background-color: @background;
+	&:hover, &.selected {
+		background-color: darken(@background, 5%);
+		box-shadow: inset 0 0 1px rgba(0,0,0, 0.20);
+	}
+
+	&:active {
+		background-color: darken(@background, 10%);
+		box-shadow: inset 0 0 2px rgba(0,0,0, 0.40);
+	}
+
+	&.success {
+		background-color: @success;
+	}
+
+	&.fail {
+		background-color: @fail;
 	}
 }
 
@@ -55,5 +69,31 @@
     height: 48px;
     border-radius: 5px;
     border: 0;
+}
+
+.action {
+	background-color: #fff;
+	border-radius: 8px;
+	min-height: 50px;
+	border: 1px solid @border;
+    width: 150px;
+    margin: 70px auto;
+	cursor: pointer;
+	transition: box-shadow 0.15s, background-color 0.15s;
+    line-height: 50px;
+    text-transform: uppercase;
+    text-align: center;
+    color: @link;
+
+	&:hover, &.continue {
+		background-color: darken(@background, 5%);
+		box-shadow: inset 0 0 1px rgba(0,0,0, 0.20);
+		color: @link-active;
+	}
+
+	&:active {
+		background-color: darken(@background, 10%);
+		box-shadow: inset 0 0 2px rgba(0,0,0, 0.40);
+	}
 }
 

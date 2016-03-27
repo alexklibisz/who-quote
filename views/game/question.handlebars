@@ -1,11 +1,11 @@
 <div class="bar">
-	<div class="top-logo">WhoQuote</div>
+    <a href="/" target="_parent"><div class="top-logo">WhoQuote</div></a>
+	<div class="gh"><i class="fa fa-github"></i></div>
 </div>
 
 <div class="wrapper">
 	<div class="container">
 		<div class="row">
-
 			<div class="image-container col-sm-6 col-xs-8 col-sm-offset-3 col-xs-offset-2">
 				<div class="quote-container">
 					<div class="quote">{{vm.question.quote.text}}</div>
@@ -14,9 +14,10 @@
 		</div>
 
 		<div class="row">
+			<div id="question" data-question="{{{ json owner.followers }}}" class="hidden"></div>
 			<div class="people-container">
 				{{#each vm.question.multipleChoiceSpeakers}}
-					<div class="person">
+					<div id="{{twitterHandle}}" class="person">
 						<img class="twitter-pic" src="https://pbs.twimg.com/profile_images/699059530924167170/-zyXIlEY_bigger.jpg">
 						<div>{{name}}</div>
 						<small>@{{twitterHandle}}</small>
@@ -24,6 +25,8 @@
 				{{/each}}
 			</div>
 		</div>
-
+		<div class="row">
+			<div id="action-btn" class="action">Forfiet</div>
+		</div>
 	</div>
 </div>
