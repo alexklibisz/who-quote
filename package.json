@@ -12,6 +12,7 @@
     "babel-register": "^6.3.13",
     "bluebird": "^3.3.4",
     "ejs": "2.3.4",
+    "forever": "^0.15.1",
     "grunt": "0.4.5",
     "grunt-contrib-clean": "0.6.0",
     "grunt-contrib-coffee": "0.13.0",
@@ -42,7 +43,7 @@
     "debug": "node debug app.js",
     "start": "node app.js --verbose",
     "dev": "node ./node_modules/nodemon/bin/nodemon.js --exec npm start",
-    "prod": "./node_modules/forever/bin/forever stopall && ./node_modules/forever/bin/forever app.js --prod"
+    "prod": "./node_modules/forever/bin/forever stopall && ./node_modules/forever/bin/forever start -o tmp.log -e tmp.log app.js --prod"
   },
   "main": "app.js",
   "repository": {
