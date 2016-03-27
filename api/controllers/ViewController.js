@@ -41,11 +41,34 @@ module.exports = {
 
   async result(req, res) {
     const {gameId} = req.params,
-    game = await Game.findOne({ id: gameId }),
+    game = await Game.findOne({ id: gameId }).populate('questions'),
     twitterHandle = game.user,
     user = await User.findOne({ twitterHandle }).populate('games');
 
-    const vm = { title: 'Results', game, user };
+    const correct = (game.questions.filter(x => x.isCorrect)).length;
+    const incorrect = game.questions.length - correct;
+    const percent = (parseFloat(correct) / game.questions.length) * 100;
+
+    var message = '';
+    switch(percent) {
+      case 100: message = 'You\'re Perfect!';
+        break;
+      case 80: message = 'Well Done!';
+        break;
+      case 60: message = 'Pretty Good!';
+        break;
+      case 40: message = 'That\s ight.';
+        break;
+      case 20: message = 'You got 1!';
+        break;
+      default: message = 'Twitter more!'
+    }
+
+    console.log(correct, incorrect, percent, message);
+
+    // const {correct, incorrect, message, percent} = '';
+
+    const vm = { title: 'Results', game, user, correct, incorrect, message, percent};
     return res.view('game/result', {
       vm,
       vms: JSON.stringify(vm)

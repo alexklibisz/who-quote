@@ -17,8 +17,13 @@
 	</div>
 </div>
 
-<div class="wrapper">
+<div class="wrapper cat">
 	{{!-- <h4 class="cat-title">Categories</h4> --}}
+
+	<div class="row">
+		<div id="action-btn" class="action again">LOGIN</div>
+	</div>
+
 	{{#each vm.categories}}		
 		<form action="/game" method="post">
 			<input type="hidden" name="category" value="{{slug}}"/>

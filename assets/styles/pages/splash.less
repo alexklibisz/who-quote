@@ -7,10 +7,23 @@
   height: 110%;
   right: 0;
   left: 0;
-  z-index: 9999;
+  z-index: 9998;
 
   & .action {
     transform: translate(0%, 300%);
+  }
+
+  &:before {
+    content: '';
+    background: url('/images/halftone.png');
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0.4;
+    -webkit-filter: grayscale(1);
   }
 }
 

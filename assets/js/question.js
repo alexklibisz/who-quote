@@ -3,8 +3,6 @@
 
 	var speakers = [];
 	var answered = false;
-	var question = {};
-	var game = {};
 
 	function selectSpeaker() {
 		var el = this;
@@ -28,8 +26,12 @@
 				} else {
 					// Awww.. better luck next time :(
 					el.classList.add('fail');
+
+					var speakerId = vm.question.quote.speaker;
+					document.getElementById(speakerId).classList.add('success');
 				}
 				document.getElementById('action-btn').innerHTML ='Next';
+				document.getElementById('link').classList.add('show');
 				document.getElementById('action-btn').classList.add('continue');
 		    },
 		    failure: function(msg) {
@@ -44,7 +46,7 @@
 		    }
 		});  
 	}
-
+	
 	function nextOrForfiet() {
 		console.log(answered);
 		if (answered) {

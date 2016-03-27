@@ -6,8 +6,9 @@
 	margin-top: 50px;
 	margin-bottom: 50px;
 	background-image: url(@twitter-img);
-	background-size: 20rem;
+	background-size: 25rem;
 	background-repeat: no-repeat;
+	background-position: 15% 25%;
 	padding: 0;
 }
 
@@ -18,6 +19,28 @@
     background: rgba(255,255,255,0.85);
     border-radius: 8px;
     border: 1px solid @border;
+    position: relative;
+
+    & .fa-link {
+    	font-size: 1.75rem;
+    	position: absolute;
+    	bottom: 7px;
+    	right: 7px;
+    	color: @icon;
+    	cursor: pointer;
+    	opacity: 0;
+    	visibility: hidden;
+    	transition: opacity 0.25s;
+
+  		&:hover {
+  			color: @link-active;
+  		}
+
+  		&.show {
+  			visibility: visible;
+  			opacity: 1;
+  		}
+    }
 }
 
 .quote {
@@ -44,7 +67,7 @@
 
 	&:hover, &.selected {
 		background-color: darken(@background, 5%);
-		box-shadow: inset 0 0 1px rgba(0,0,0, 0.20);
+		// box-shadow: inset 0 0 1px rgba(0,0,0, 0.20);
 	}
 
 	&:active {

@@ -9,6 +9,7 @@
 			<div class="image-container col-sm-6 col-xs-8 col-sm-offset-3 col-xs-offset-2">
 				<div class="quote-container">
 					<div class="quote">{{vm.question.quote.text}}</div>
+					<a href="{{ vm.question.quote.sourceURL }}" target="_blank"><i id="link" class="fa fa-link"></i></a>
 				</div>
 			</div>
 		</div>
@@ -17,7 +18,7 @@
 			<div class="people-container">
 				{{#each vm.question.multipleChoiceSpeakers}}
 					<div id="{{twitterId}}" class="person">
-						<img class="twitter-pic" src="https://pbs.twimg.com/profile_images/699059530924167170/-zyXIlEY_bigger.jpg">
+						<img class="twitter-pic" src="{{imageURL}}">
 						<div>{{name}}</div>
 						<small>@{{twitterHandle}}</small>
 					</div>
