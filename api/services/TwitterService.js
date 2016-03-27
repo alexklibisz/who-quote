@@ -69,7 +69,6 @@ module.exports.getNewQuotes = async function getNewQuotes({ category }) {
   // Convert the sanitized tweets into quote objects and create the quote objects.
   const
     quotes = tweets.map(x => {
-      console.log(JSON.stringify(x, null, 2));
       return {
         tweetId: x.id,
         text: x.text,
