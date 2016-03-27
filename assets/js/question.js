@@ -4,17 +4,14 @@
 	var speakers = [];
 	var answered = false;
 	var question = {};
+	var game = {};
 
 	function selectSpeaker() {
 		var el = this;
 
-		question = document.getElementById('question').dataset.question;
-		var qId = question.id
-		console.log(el.dataset, qId);
-
 		$.ajax({
-		    url: '/question/' + qId,
-		    method: 'POST',
+		    url: '/api/question/' + vm.question.id,
+		    method: 'PUT',
 
 		    // Tell the server we're sending JSON--not strictly necessary with Sails,
 		    // but recommended.
@@ -25,13 +22,21 @@
 
 		    // Stringify the data--otherwise it will send "[object object]"
 		    data: JSON.stringify({
-		        selectedSpeaker: el.dataset.th
+		        selectedSpeaker: el.id
 		     }),
 
 		    success: function(result) {
-		        // window.location('/character/show/'+$("a#identity-edit").attr("data-id"));
 		        console.log('Lets see... ', result);
-		        displayAns(result.isCorrect);
+		        answered = true;
+				if (result.isCorrect) {
+					// Good job! :)
+					el.classList.add('success');
+				} else {
+					// Awww.. better luck next time :(
+					el.classList.add('fail');
+				}
+				document.getElementById('action-btn').innerHTML ='Next';
+				document.getElementById('action-btn').classList.add('continue');
 		    },
 		    failure: function(msg) {
 		        alert("Fail : " + msg);
@@ -42,34 +47,22 @@
 		        alert(response.error);
 		    }
 		});  
-
-		// for (var i = 0; i < speakers.length; i++) {
-	 //      speakers[i].classList.remove('selected');
-	 //    }
-	 //    el.classList.add('selected');
-	    //document.getElementById('q-action').innerHTML = 'Submit';
-	}
-
-	function displayAns(isCorrect) {
-		var answered = true;
-		if (isCorrect) {
-			// Good job! :)
-			console.log(answered, question);
-
-		} else {
-			// Awww.. better luck next time :(
-
-		}
-		$('action').html = 'Next';
 	}
 
 	function nextOrForfiet() {
+		console.log(answered);
 		if (answered) {
 			// next
-			window.location('game/' + question.game.id + '/question' + question.id);
+			var url = window.location.href;
+			var qNum = parseInt(url.substr(url.lastIndexOf("/")+1)) + 1;
+			if(qNum > vm.game.questions.length) {
+				console.log('end game');
+			} else {
+				window.location = '/game/' + vm.game.id + '/question/' + qNum;
+			}
 		} else {
 			// home
-			window.location('game/select-category');
+			window.location = '/game/select-category';
 		}
 	}
 
@@ -79,11 +72,9 @@
 	      speakers[i].addEventListener('click', selectSpeaker, false);
 	    }
 
-	    $( 'action' ).on( 'click', function(event) {
+	    $('#action-btn').on( 'click', function(event) {
 		  nextOrForfiet();
-		});
-
-	    console.log('set handlers');
+		});		
 	}
 
 	setHandlers();

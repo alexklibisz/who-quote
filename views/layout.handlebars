@@ -30,6 +30,7 @@
 
     <!--STYLES-->
     <link rel="stylesheet" href="/styles/index.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <!--STYLES END-->
   </head>
 
@@ -46,18 +47,6 @@
           <label> ●</label>
         </div>
       </div>
-      {{!-- <div class="loader">
-        <div class="loader-inner ball-spin-fade-loader">
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
-      </div> --}}
     </div>
     {{{body}}}
 
@@ -116,6 +105,10 @@
     <script src="/js/dependencies/sails.io.js"></script>
     <script src="/js/dependencies/jquery-2.2.2.js"></script>
     <script src="/js/question.js"></script>
+    <script src="/js/categories.js"></script>
+    <script>
+      var vm = {{{vms}}}
+    </script>
     <!--SCRIPTS END-->
   </body>
 </html>

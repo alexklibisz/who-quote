@@ -9,3 +9,7 @@ Handlebars.registerHelper('list', function(items, options) {
 
   return out + "</ul>";
 });
+
+Handlebars.registerHelper('json', function(context) {
+    return JSON.stringify(context);
+});
