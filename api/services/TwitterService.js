@@ -5,6 +5,16 @@ import Promise from 'bluebird';
 
 const twitterAPI = new Twitter(sails.config.twitter);
 
+module.exports.getUserProfile = async function({ twitterId }) {
+  return new Promise(function(resolve, reject) {
+    const params = { user_id: twitterId }
+    twitterAPI.get('users/lookup', params, function(error, user, response){
+      if (!error) resolve(user.shift());
+      else reject(error);
+    });
+  });
+};
+
 /**
  * Check if the oldest quote is > 3 days old or there are
  * fewer than 10 quotes total for this category and speaker.
@@ -23,7 +33,7 @@ module.exports.getNewQuotes = async function getNewQuotes({ category }) {
 
   // Return if the newest quote is less than one day old and there are
   // more than 100 quotes total for this category.
-  if(daysSinceCreated < 1 && quotesCount > 100) {
+  if(daysSinceCreated < 1 && quotesCount > 200) {
     return;
   }
 
@@ -56,9 +66,6 @@ module.exports.getNewQuotes = async function getNewQuotes({ category }) {
       .map(x => getTweets(x[0].twitterId, ((x[1] !== undefined) ? x[1].tweetId : 0))),
     tweets = _.flatten((await Promise.all(tweetRequests)));
 
-  // Sanitize the tweets
-  const sanitizedTweets = tweets;
-
   // Convert the sanitized tweets into quote objects and create the quote objects.
   const
     quotes = tweets.map(x => {
@@ -66,7 +73,7 @@ module.exports.getNewQuotes = async function getNewQuotes({ category }) {
         tweetId: x.id,
         text: x.text,
         speaker: x.user.id,
-        sourceURL: `https://twitter.com/${x.user.id}/status/${x.id}`,
+        sourceURL: `https://twitter.com/${x.user.id}/status/${x.id_str}`,
         category
       };
     }),

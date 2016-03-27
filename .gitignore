@@ -118,3 +118,4 @@ nbproject
 .node_history
 
 tmp*
+*.log.*
