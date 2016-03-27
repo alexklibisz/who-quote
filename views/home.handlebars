@@ -1,13 +1,47 @@
-<div class="background"></div>
-
-<div class="container">
-<div class="row">
-<a href="/" class="logo">
-	WhoQuote
-</a>
+<div class="bar">
+    <a href="/" target="_parent"><div class="top-logo">WhoQuote</div></a>
+	<div class="gh"><i class="fa fa-github"></i></div>
 </div>
 
-	<div class="row">
-		<div class="action" style="transform: translate(0%, 300%);">PLAY</div>
+<div class="background">
+	<div class="container">
+		<div class="row">
+			<a href="/" class="logo">
+				WhoQuote
+			</a>
+		</div>
+
+		<div class="row">
+			<div id="play-btn" class="action">PLAY</div>
+		</div>
 	</div>
 </div>
+
+<div class="wrapper cat">
+	{{!-- <h4 class="cat-title">Categories</h4> --}}
+
+	<div class="row">
+		<div id="action-btn" class="action again">LOGIN</div>
+	</div>
+
+	{{#each vm.categories}}		
+		<form action="/game" method="post">
+			<input type="hidden" name="category" value="{{slug}}"/>
+			<input type="hidden" name="user" value="testUser"/>
+			{{!-- <input type="submit" class="btn btn-default"> --}}
+			<section id="{{slug}}" class="parallax" style="background-image: url(/images/{{slug}}.jpg)" onClick="javascript:this.parentNode.submit();">
+			  <div class="mod-container">
+			    <h1>{{name}}</h1>
+			  </div>
+			</section>
+		</form>
+	{{/each}}
+</div>
+
+{{!-- <section id="{{slug}}" class="parallax" data-user="testUser" style="background-image: url(/images/{{slug}}.jpg)">
+  <div class="mod-container">
+    <h1>{{name}}</h1>
+  </div>
+</section>
+ --}}
+

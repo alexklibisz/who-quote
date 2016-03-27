@@ -6,7 +6,7 @@
 
 	function selectSpeaker() {
 		var el = this;
-		if (answered) return
+		if (answered) return;
 
 		answered = true;
 		$.ajax({
@@ -46,7 +46,6 @@
 		    }
 		});  
 	}
-	
 	function nextOrForfiet() {
 		console.log(answered);
 		if (answered) {

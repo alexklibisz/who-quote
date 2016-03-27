@@ -4,8 +4,7 @@ module.exports.routes = {
   // These are view routes that create server-rendered views.
   // The views are rendered via return res.view(viewName, viewModel)
   // with Handlebars templating in the view.
-  // '/': 'ViewController.index',
-  '/': 'ViewController.selectCategory',
+  '/': 'ViewController.index',
   'POST /game': 'ViewController.game',
   '/game/:gameId/question/:questionNumber': 'ViewController.question',
   '/game/:gameId/result': 'ViewController.result',
