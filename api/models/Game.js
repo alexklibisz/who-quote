@@ -56,10 +56,8 @@ module.exports.attributes = {
 module.exports.afterCreate = async function afterCreate(game, next) {
 
   // Call the getNewQuotes function to load in new quotes if they are necessary
-  await TwitterService.getNewQuotes({
-    category: game.category
-  });
-
+  await TwitterService.getNewQuotes({ category: game.category });
+  
   // Questions need: game (game id), quote, multipleChoiceSpeakers.
   const questionCount = 5;
 

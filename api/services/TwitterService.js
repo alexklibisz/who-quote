@@ -5,6 +5,16 @@ import Promise from 'bluebird';
 
 const twitterAPI = new Twitter(sails.config.twitter);
 
+module.exports.getUserProfile = async function({ twitterId }) {
+  return new Promise(function(resolve, reject) {
+    const params = { user_id: twitterId }
+    twitterAPI.get('users/lookup', params, function(error, user, response){
+      if (!error) resolve(user.shift());
+      else reject(error);
+    });
+  });
+};
+
 /**
  * Check if the oldest quote is > 3 days old or there are
  * fewer than 10 quotes total for this category and speaker.
@@ -55,8 +65,6 @@ module.exports.getNewQuotes = async function getNewQuotes({ category }) {
     tweetRequests = _.zip(speakers, newestQuotes)
       .map(x => getTweets(x[0].twitterId, ((x[1] !== undefined) ? x[1].tweetId : 0))),
     tweets = _.flatten((await Promise.all(tweetRequests)));
-
-  // TODO: could sanitize the tweets here
 
   // Convert the sanitized tweets into quote objects and create the quote objects.
   const

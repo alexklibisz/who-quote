@@ -22,13 +22,17 @@ module.exports.bootstrap = async function bootstrap(cb) {
     throw error;
   });
 
-  // Destroy and recreate categories
+  // Create categories
   const categoryCreatePromises = CategoryJSON.map(x => Category.findOrCreate({ slug: x.slug }, x));
   await Promise.all(categoryCreatePromises);
 
-  // Destroy and recreate speakers
+  // Create speakers
   const speakerCreatePromises = SpeakerJSON.map(x => Speaker.findOrCreate(x, x));
   await Promise.all(speakerCreatePromises);
+
+  // Sync speakers with Twitter
+  const speakerSyncPromises = SpeakerJSON.map(x => Speaker.syncWithTwitter({ twitterId: x.twitterId }));
+  await Promise.all(speakerSyncPromises);
 
   if(process.env.NODE_ENV === 'development') {
     // Create a testing user

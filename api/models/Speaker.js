@@ -22,6 +22,20 @@ module.exports.attributes = {
   category: {
     model: 'Category',
     required: true
+  },
+
+  imageURL: {
+    type: 'String'
   }
 
+};
+
+module.exports.syncWithTwitter = async function syncWithTwitter({ twitterId }) {
+  const
+    profile = await TwitterService.getUserProfile({ twitterId }),
+    speaker = await Speaker.update(twitterId, {
+      twitterHandle: profile.screen_name,
+      name: profile.name,
+      imageURL: profile.profile_image_url.replace('normal', 'bigger')
+    });
 };
