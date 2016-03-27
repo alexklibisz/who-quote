@@ -43,7 +43,7 @@
     "debug": "node debug app.js",
     "start": "node app.js --verbose",
     "dev": "node ./node_modules/nodemon/bin/nodemon.js --exec npm start",
-    "prod": "./node_modules/forever/bin/forever stopall && ./node_modules/forever/bin/forever app.js --prod"
+    "prod": "./node_modules/forever/bin/forever stopall && ./node_modules/forever/bin/forever start -o tmp.log -e tmp.log app.js --prod"
   },
   "main": "app.js",
   "repository": {
