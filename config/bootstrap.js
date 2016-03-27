@@ -23,7 +23,7 @@ module.exports.bootstrap = async function bootstrap(cb) {
   });
 
   // Destroy and recreate categories
-  const categoryCreatePromises = CategoryJSON.map(x => Category.findOrCreate(x, x));
+  const categoryCreatePromises = CategoryJSON.map(x => Category.findOrCreate({ slug: x.slug }, x));
   await Promise.all(categoryCreatePromises);
 
   // Destroy and recreate speakers

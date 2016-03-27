@@ -1,6 +1,13 @@
 [
   {
     "name": "Politicians",
-    "slug": "politicians"
+    "slug": "politicians",
+    "imageURL": "https://images.unsplash.com/photo-1450430463204-6f53fe1c2777?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&s=6a19a25cb360cfca9da6cb5504472806"
+  },
+
+  {
+    "name": "Athletes",
+    "slug": "athletes",
+    "imageURL": "https://images.unsplash.com/photo-1430232324554-8f4aebd06683?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&s=7e53fe70393731a353903bf1b7104764"
   }
 ]
