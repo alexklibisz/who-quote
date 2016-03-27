@@ -31,7 +31,7 @@ module.exports.attributes = {
   // Set via beforeUpdate function
   isCorrect: {
     type: 'boolean',
-    defaultsTo: null
+    defaultsTo: false
   }
 
 };

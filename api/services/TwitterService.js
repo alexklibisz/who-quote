@@ -1,6 +1,7 @@
 'use strict';
 
 import Twitter from 'twitter';
+import Promise from 'bluebird';
 
 const twitterAPI = new Twitter(sails.config.twitter);
 
@@ -26,27 +27,49 @@ module.exports.getNewQuotes = async function getNewQuotes({ category }) {
     return;
   }
 
-  // Retrieve 5 new tweets for each speaker in this category
+  // Get the newest quote for each speaker
   const
-    speakers = await Speaker.find({ category })
-    ;
+    speakers = await Speaker.find({ category }),
+    newestQuoteRequests = speakers.map(x => Quote.find({ speaker: x.twitterId }).limit(1)),
+    newestQuotes = (await Promise.all(newestQuoteRequests)).map(x => x.shift());
 
+  // Create tweet requests for each of the speakers.
+  // End result should be an array of tweets, about 10 per user.
+  const
+    getTweets = function getTweets(twitterId, sinceId) {
+      const params = {
+        user_id: twitterId,
+        since_id: sinceId,
+        exclude_replies: true,
+        include_rts: false,
+        count: 10
+      };
+      if(params.since_id === 0) delete params.since_id;
+      return new Promise(function(resolve, reject) {
+        twitterAPI.get('statuses/user_timeline', params, function(error, tweets, response){
+          if (!error) resolve(tweets);
+          else reject(error);
+        });
+      });
+    },
+    tweetRequests = _.zip(speakers, newestQuotes)
+      .map(x => getTweets(x[0].twitterId, ((x[1] !== undefined) ? x[1].tweetId : 0))),
+    tweets = _.flatten((await Promise.all(tweetRequests)));
 
+  // Sanitize the tweets
+  const sanitizedTweets = tweets;
 
-  const params = {
-    screen_name: 'realDonaldTrump',
-    count: 10,
-    exclude_replies: true,
-    include_rts: false
-  };
-
-  const trump = await twitterAPI.get('statuses/user_timeline', params, function(error, tweets, response){
-    if (!error) {
-      console.log(tweets);
-    } else {
-      console.error(error);
-    }
-  });
-
-
+  // Convert the sanitized tweets into quote objects and create the quote objects.
+  const
+    quotes = tweets.map(x => {
+      return {
+        tweetId: x.id,
+        text: x.text,
+        speaker: x.user.id,
+        sourceURL: `https://twitter.com/${x.user.id}/status/${x.id}`,
+        category
+      };
+    }),
+    quoteCreateRequests = quotes.map(x => Quote.create(x)),
+    createdQuotes = await Promise.all(quoteCreateRequests);
 }
