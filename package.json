@@ -40,7 +40,7 @@
   },
   "scripts": {
     "debug": "node debug app.js",
-    "start": "node --require babel-register --require babel-polyfill app.js --verbose",
+    "start": "node --require babel-register --require babel-polyfill app.js --verbose --port=1337",
     "dev": "node ./node_modules/nodemon/bin/nodemon.js --exec npm start"
   },
   "main": "app.js",

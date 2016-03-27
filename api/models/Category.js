@@ -18,6 +18,11 @@ module.exports.attributes = {
     type: 'string',
     required: true,
     primaryKey: true
+  },
+
+  imageURL: {
+    type: 'string',
+    required: true
   }
 
 };
