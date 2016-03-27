@@ -16,8 +16,8 @@ module.exports = {
     connection: 'mongo'
   },
 
-  port: 8080,
-  
+  port: 80,
+
   log: {
     level: "debug"
   }
