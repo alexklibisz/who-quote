@@ -8,19 +8,10 @@
 module.exports = {
 
   async index(req, res) {
-    const vm = {
-      title: 'Home'
-    };
-    return res.view('home', {
-      vm
-    });
-  },
-
-  async selectCategory(req, res) {
     const categories = await Category.find({});
     const vm = { categories };
 
-    return res.view('game/select-category', {
+    return res.view('home', {
       vm
     });
   },
