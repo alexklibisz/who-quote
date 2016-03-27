@@ -3,17 +3,16 @@
 .background {
 	background-color: @main;
   position: absolute;
-  top: 0;
-  bottom: 0;
+  top: -10%;
+  height: 110%;
   right: 0;
   left: 0;
-}
+  z-index: 9999;
 
-// body {
-//   margin: 0;
-//   padding: 0;
-//   background:#3498db;
-// }
+  & .action {
+    transform: translate(0%, 300%);
+  }
+}
 
 .logo {
   display: block;

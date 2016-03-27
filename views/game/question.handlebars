@@ -14,10 +14,9 @@
 		</div>
 
 		<div class="row">
-			<div id="question" data-question="{{{ json owner.followers }}}" class="hidden"></div>
 			<div class="people-container">
 				{{#each vm.question.multipleChoiceSpeakers}}
-					<div id="{{twitterHandle}}" class="person">
+					<div id="{{twitterId}}" class="person">
 						<img class="twitter-pic" src="https://pbs.twimg.com/profile_images/699059530924167170/-zyXIlEY_bigger.jpg">
 						<div>{{name}}</div>
 						<small>@{{twitterHandle}}</small>
@@ -26,7 +25,7 @@
 			</div>
 		</div>
 		<div class="row">
-			<div id="action-btn" class="action">Forfiet</div>
+			<div id="action-btn" class="action">Give up</div>
 		</div>
 	</div>
 </div>

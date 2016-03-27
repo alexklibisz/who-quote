@@ -8,26 +8,20 @@
 
 	function selectSpeaker() {
 		var el = this;
+		if (answered) return
 
+		answered = true;
 		$.ajax({
 		    url: '/api/question/' + vm.question.id,
 		    method: 'PUT',
-
-		    // Tell the server we're sending JSON--not strictly necessary with Sails,
-		    // but recommended.
 		    contentType: 'application/json', 
-
-		    // Don't URLencode data
 		    processData: false,
-
-		    // Stringify the data--otherwise it will send "[object object]"
 		    data: JSON.stringify({
 		        selectedSpeaker: el.id
 		     }),
 
 		    success: function(result) {
-		        console.log('Lets see... ', result);
-		        answered = true;
+		        console.log('Lets see... ', result);		   
 				if (result.isCorrect) {
 					// Good job! :)
 					el.classList.add('success');
@@ -39,9 +33,11 @@
 				document.getElementById('action-btn').classList.add('continue');
 		    },
 		    failure: function(msg) {
-		        alert("Fail : " + msg);
+		        alert("Fail to submit vote: " + msg);
+		        answered = false;
 		    },
 		    error: function(xhr, status, text) {
+		        answered = false;
 		        alert(text);
 		        var response = jQuery.parseJSON(xhr, responseText);
 		        alert(response.error);
@@ -57,12 +53,13 @@
 			var qNum = parseInt(url.substr(url.lastIndexOf("/")+1)) + 1;
 			if(qNum > vm.game.questions.length) {
 				console.log('end game');
+				window.location = '/game/' + vm.game.id + '/result';
 			} else {
 				window.location = '/game/' + vm.game.id + '/question/' + qNum;
 			}
 		} else {
 			// home
-			window.location = '/game/select-category';
+			window.location = '/';
 		}
 	}
 

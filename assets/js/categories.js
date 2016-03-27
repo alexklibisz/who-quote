@@ -31,13 +31,31 @@
 		});
 	}
 
-	function setHandlers() {
-		var categories = document.getElementsByClassName('parallax');
-	    for (var i = 0; i < categories.length; i++) {
-	      categories[i].addEventListener('click', selectCategory, false);
-	    }
+	function play() {
+		setTimeout(function() {
+			$('body').css({
+		      "overflow-y": "hidden"
+		    });
+			$('.background').animate({ top: '-=' + document.documentElement.clientHeight + 'px'}, 1200, 'easeInOutBack', 
+				function () { 
+					$('body').css({
+				      "overflow-y": "auto",
+				    });
+				});
+		}, 200);
 	}
 
-	//setHandlers();
+	function setHandlers() {
+		// var categories = document.getElementsByClassName('parallax');
+	 //    for (var i = 0; i < categories.length; i++) {
+	 //      categories[i].addEventListener('click', selectCategory, false);
+	 //    }
+
+	 var playBtn = document.getElementById('play-btn');
+	 if (playBtn !== null) playBtn.addEventListener('click', play, false);
+
+	}
+
+	setHandlers();
 
 })();

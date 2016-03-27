@@ -40,12 +40,15 @@ module.exports = {
   },
 
   async result(req, res) {
-    const vm = {
-      title: 'Result',
-      gameId: req.params.gameId
-    };
+    const {gameId} = req.params,
+    game = await Game.findOne({ id: gameId }),
+    twitterHandle = game.user,
+    user = await User.findOne({ twitterHandle }).populate('games');
+
+    const vm = { title: 'Results', game, user };
     return res.view('game/result', {
-      vm
+      vm,
+      vms: JSON.stringify(vm)
     });
   },
 
