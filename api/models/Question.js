@@ -39,8 +39,13 @@ module.exports.attributes = {
     type: 'boolean',
     defaultsTo: false,
     required: true
-  }
+  },
 
+  // TODO: remove the question.quote.speaker so ppl can't cheat.
+  toJSON() {
+    const question = this.toObject();
+    return question;
+  }
 };
 
 /**
