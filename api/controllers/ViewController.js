@@ -29,7 +29,8 @@ module.exports = {
     const
       {gameId, questionNumber} = req.params,
       game = await Game.findOne({ id: gameId }).populate('questions'),
-      questionId = game.questions[questionNumber - 1].id,
+      sortedQuestions = game.questions.sort((a,b) => a.id.localeCompare(b.id)),
+      questionId = sortedQuestions[questionNumber - 1].id,
       question = await Question.findOne({ id: questionId }).populate(['quote', 'multipleChoiceSpeakers']);
 
     const vm = { title: 'Question', game, question };
