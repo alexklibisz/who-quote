@@ -2,31 +2,37 @@
   {
     "name": "Donald J. Trump",
     "twitterHandle": "realDonaldTrump",
-    "category": "politicians"
+    "category": "politicians",
+    "twitterId": "25073877"
   },
   {
     "name": "Ted Cruz",
     "twitterHandle": "tedcruz",
-    "category": "politicians"
+    "category": "politicians",
+    "twitterId": "23022687"
   },
   {
     "name": "John Kasich",
     "twitterHandle": "JohnKasich",
-    "category": "politicians"
+    "category": "politicians",
+    "twitterId": "18020081"
   },
   {
     "name": "Bernie Sanders",
     "twitterHandle": "BernieSanders",
-    "category": "politicians"
+    "category": "politicians",
+    "twitterId": "216776631"
   },
   {
     "name": "Hillary Clinton",
     "twitterHandle": "HillaryClinton",
-    "category": "politicians"
+    "category": "politicians",
+    "twitterId": "1339835893"
   },
   {
     "name": "President Obama",
     "twitterHandle": "POTUS",
-    "category": "politicians"
+    "category": "politicians",
+    "twitterId": "1536791610"
   }
 ]

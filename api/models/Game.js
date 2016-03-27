@@ -49,8 +49,8 @@ module.exports.afterCreate = async function afterCreate(game, next) {
     speakers = await Speaker.find({ category: game.category }),
     multipleChoiceSpeakerGroups = quotes.map((quote) => {
       const
-        quoteSpeaker = speakers.filter(x => x.twitterHandle === quote.speaker),
-        filtered = speakers.filter(x => x.twitterHandle !== quote.speaker),
+        quoteSpeaker = speakers.filter(x => x.twitterId === quote.speaker),
+        filtered = speakers.filter(x => x.twitterId !== quote.speaker),
         shuffled = _.shuffle(filtered);
       return _.shuffle(shuffled.splice(0,3).concat(quoteSpeaker));
     });
@@ -61,13 +61,15 @@ module.exports.afterCreate = async function afterCreate(game, next) {
       .map(x => {
         const
           quote = x[0].id,
-          multipleChoiceSpeakers = x[1].map(x => x.twitterHandle);
+          multipleChoiceSpeakers = x[1].map(x => x.twitterId);
         return {
           game: game.id, quote, multipleChoiceSpeakers
         };
       }),
     questionCreatePromises = questionObjects.map(x => Question.create(x)),
     questions = await Promise.all(questionCreatePromises);
+
+  await TwitterService.getNewQuotes({ category: game.category });
 
   next();
 };
