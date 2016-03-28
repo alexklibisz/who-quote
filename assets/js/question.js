@@ -20,19 +20,7 @@
 
 		    success: function(result) {
 		        console.log('Lets see... ', result);		   
-				if (result.isCorrect) {
-					// Good job! :)
-					el.classList.add('success');
-				} else {
-					// Awww.. better luck next time :(
-					el.classList.add('fail');
-
-					var speakerId = vm.question.quote.speaker;
-					document.getElementById(speakerId).classList.add('success');
-				}
-				document.getElementById('action-btn').innerHTML ='Next';
-				document.getElementById('link').classList.add('show');
-				document.getElementById('action-btn').classList.add('continue');
+				displayAns(result.isCorrect, el);
 		    },
 		    failure: function(msg) {
 		        alert("Fail to submit vote: " + msg);
@@ -46,6 +34,7 @@
 		    }
 		});  
 	}
+
 	function nextOrForfiet() {
 		console.log(answered);
 		if (answered) {
@@ -64,6 +53,39 @@
 		}
 	}
 
+	function displayAns(isCorrect, selected) {
+		if (isCorrect) {
+			// Good job! :)
+			selected.classList.add('success');
+		} else {
+			// Awww.. better luck next time :(
+			selected.classList.add('fail');
+
+			var speakerId = vm.question.quote.speaker;
+			document.getElementById(speakerId).classList.add('success');
+		}
+		document.getElementById('action-btn').innerHTML ='Next';
+		document.getElementById('link').classList.add('show');
+		document.getElementById('action-btn').classList.add('continue');
+	}
+
+
+	function pollVm() {
+	    setTimeout(function() {
+	    	if (vm !== undefined) {
+	    		console.log(vm);
+				if (vm.question.isComplete === true) {
+					answered = true;
+					var selected = document.getElementById(vm.question.selectedSpeaker);
+					displayAns(vm.question.isCorrect, selected);
+				}
+	    	} else {
+	    		console.log('Try again... ');
+	    		pollVm();
+	    	}
+	    }, 10);
+	}
+
 	function setHandlers() {
 		speakers = document.getElementsByClassName('person');
 	    for (var i = 0; i < speakers.length; i++) {
@@ -72,7 +94,9 @@
 
 	    $('#action-btn').on( 'click', function(event) {
 		  nextOrForfiet();
-		});		
+		});
+
+		pollVm();
 	}
 
 	setHandlers();
