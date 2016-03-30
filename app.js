@@ -18,17 +18,6 @@
  * `node app.js --silent --port=80 --prod`
  */
 
-// Babel setup
-process.env.BABEL_DISABLE_CACHE = 1;
-require('babel-register');
-require('babel-polyfill');
-
-// Prevent promises from swallowing errors.
-process.on('unhandledRejection', function(error, promise) {
-  console.error(error.toString());
-  throw (error);
-});
-
 // Ensure we're in the project directory, so relative paths work as expected
 // no matter where we actually lift from.
 process.chdir(__dirname);
