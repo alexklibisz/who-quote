@@ -11,8 +11,6 @@
     "babel-preset-stage-1": "^6.3.13",
     "babel-register": "^6.3.13",
     "bluebird": "^3.3.4",
-    "ejs": "2.3.4",
-    "express": "^4.13.4",
     "forever": "^0.15.1",
     "grunt": "0.4.5",
     "grunt-contrib-clean": "0.6.0",
@@ -28,6 +26,7 @@
     "grunt-sync": "0.2.4",
     "handlebars": "^4.0.5",
     "include-all": "~0.1.6",
+    "nodemon": "^1.9.1",
     "rc": "1.0.1",
     "sails": "~0.12.1",
     "sails-disk": "~0.10.9",
@@ -42,7 +41,7 @@
   },
   "scripts": {
     "debug": "node debug app.js",
-    "start": "node index.js",
+    "start": "node app.js --prod",
     "start2": "./node_modules/forever/bin/forever app.js --prod",
     "dev": "node ./node_modules/nodemon/bin/nodemon.js --exec npm start",
     "prod": "./node_modules/forever/bin/forever stopall && ./node_modules/forever/bin/forever -o tmp.log -e tmp.log app.js --prod"
@@ -53,9 +52,5 @@
     "url": "git://github.com/alex/template-stuff.git"
   },
   "author": "alex",
-  "license": "",
-  "devDependencies": {
-    "babel-preset-stage-1": "^6.5.0",
-    "nodemon": "^1.9.1"
-  }
+  "license": ""
 }
