@@ -14,34 +14,28 @@ import SpeakerJSON from '../api/static/Speaker.json';
 import QuoteJSON from '../api/static/Quote.json';
 import Promise from 'bluebird';
 
-module.exports.bootstrap = async function bootstrap(cb) {
-
-  // Define promises to throw errors instead of swallowing them
-  Promise.onPossiblyUnhandledRejection(function (error) {
-    console.error(error);
-    throw error;
-  });
+module.exports.bootstrap = function bootstrap(cb) {
 
   // Create categories
   const categoryCreatePromises = CategoryJSON.map(x => Category.findOrCreate({ slug: x.slug }, x));
-  await Promise.all(categoryCreatePromises);
+  Promise.all(categoryCreatePromises).then(() => console.log('bootstrap categories done'));
 
   // Create speakers
   const speakerCreatePromises = SpeakerJSON.map(x => Speaker.findOrCreate(x, x));
-  await Promise.all(speakerCreatePromises);
+  Promise.all(speakerCreatePromises).then(() => console.log('bootstrap speakers done'));;
 
   // Sync speakers with Twitter
   const speakerSyncPromises = SpeakerJSON.map(x => Speaker.syncWithTwitter({ twitterId: x.twitterId }));
-  await Promise.all(speakerSyncPromises);
+  Promise.all(speakerSyncPromises).then(() => console.log('bootstrap speakers sync done'));;
 
   if(process.env.NODE_ENV === 'development') {
     // Create a testing user
     const testUser = { twitterHandle: 'testUser', name: 'test user' };
-    await User.findOrCreate(testUser, testUser);
+    User.findOrCreate(testUser, testUser).then(() => console.log('bootstrap test user done'));
 
     // Create quotes
     const quoteCreatePromises = QuoteJSON.map(x => Quote.findOrCreate(x, x));
-    await Promise.all(quoteCreatePromises);
+    Promise.all(quoteCreatePromises).then(() => console.log('bootstrap quotes done'));
   }
 
   cb();
