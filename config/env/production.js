@@ -18,6 +18,8 @@ module.exports = {
 
   port: process.env.OPENSHIFT_NODEJS_PORT || 5000,
 
+  host: process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1',
+
   log: {
     level: "debug"
   }
