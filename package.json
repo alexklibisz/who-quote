@@ -2,7 +2,7 @@
   "name": "whoquote-server",
   "private": true,
   "version": "0.0.0",
-  "description": "a Sails application",
+  "description": "Whoquote Server",
   "keywords": [],
   "dependencies": {
     "babel": "^6.3.26",
@@ -48,7 +48,7 @@
   "main": "app.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/alex/template-stuff.git"
+    "url": "git://github.com/alexklibisz/who-quote.git"
   },
   "author": "alex",
   "license": ""
