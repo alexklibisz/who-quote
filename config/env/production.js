@@ -16,9 +16,9 @@ module.exports = {
     connection: 'mongo'
   },
 
-  port: process.env.OPENSHIFT_NODEJS_PORT || 5000,
+  port: process.env.OPENSHIFT_NODEJS_PORT || 8080,
 
-  host: process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1',
+//  host: process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1',
 
   log: {
     level: "debug"
