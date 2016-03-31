@@ -22,6 +22,8 @@ module.exports = {
 
   log: {
     level: "debug"
-  }
+  },
+
+  hookTimeout: 30000
 
 };
