@@ -41,8 +41,7 @@
   },
   "scripts": {
     "debug": "node debug server.js",
-    "start2": "node server.js --prod",
-    "start": "./node_modules/forever/bin/forever server.js --prod",
+    "start": "./node_modules/forever/bin/forever server.js --prod --verbose",
     "dev": "node ./node_modules/nodemon/bin/nodemon.js --exec npm start"
   },
   "main": "app.js",

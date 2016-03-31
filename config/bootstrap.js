@@ -18,24 +18,29 @@ module.exports.bootstrap = function bootstrap(cb) {
 
   // Create categories
   const categoryCreatePromises = CategoryJSON.map(x => Category.findOrCreate({ slug: x.slug }, x));
-  Promise.all(categoryCreatePromises).then(() => console.log('bootstrap categories done'));
+  Promise.all(categoryCreatePromises)
+    .then(() => sails.log.verbose('bootstrap: create categories'));
 
   // Create speakers
   const speakerCreatePromises = SpeakerJSON.map(x => Speaker.findOrCreate(x, x));
-  Promise.all(speakerCreatePromises).then(() => console.log('bootstrap speakers done'));;
+  Promise.all(speakerCreatePromises)
+    .then(() => sails.log.verbose('bootstrap: create speakers'));
 
   // Sync speakers with Twitter
   const speakerSyncPromises = SpeakerJSON.map(x => Speaker.syncWithTwitter({ twitterId: x.twitterId }));
-  Promise.all(speakerSyncPromises).then(() => console.log('bootstrap speakers sync done'));;
+  Promise.all(speakerSyncPromises)
+    .then(() => sails.log.verbose('bootstrap: sync speakers with twitter'));
 
   if(process.env.NODE_ENV === 'development') {
     // Create a testing user
     const testUser = { twitterHandle: 'testUser', name: 'test user' };
-    User.findOrCreate(testUser, testUser).then(() => console.log('bootstrap test user done'));
+    User.findOrCreate(testUser, testUser)
+      .then(() => sails.log.verbose('bootstrap: create test user'));
 
     // Create quotes
     const quoteCreatePromises = QuoteJSON.map(x => Quote.findOrCreate(x, x));
-    Promise.all(quoteCreatePromises).then(() => console.log('bootstrap quotes done'));
+    Promise.all(quoteCreatePromises)
+      .then(() => sails.log.verbose('bootstrap: create quotes'));
   }
 
   cb();
